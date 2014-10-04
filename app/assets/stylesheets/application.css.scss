@@ -11,3 +11,38 @@
  *= require_self
  *= require_tree .
  */
+
+ body {
+ 	margin: 0;
+ 	padding: 0;
+ }
+
+ #core {
+ 	width: 100%;
+ 	max-width: 600px;
+ 	margin: 0 auto;
+ 	background: #F5E5C0;
+ }
+
+header {
+	height: 4em;
+	background: #2F3440;
+
+	nav {
+		display: inline-block;
+	}
+
+	#logo {
+		display: inline-block;
+		height: 3em;
+		padding: .5em 0;
+
+		img {
+			height: 100%;
+		}
+	}
+
+	#drunk-o-meter {
+		display: inline-block;
+	}
+}

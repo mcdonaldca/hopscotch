@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="core">
+		<header>
+			<nav>
+			</nav>
+			<div id="logo">
+				<%= image_tag "hopscotch.png" %>
+			</div>
+			<div id="drunk-o-meter">
+			</div>
+		</header>
 
-<%= yield %>
-
+		<%= yield %>
+	</div>
 </body>
 </html>

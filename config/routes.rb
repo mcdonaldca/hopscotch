@@ -1,4 +1,12 @@
 Hopscotch::Application.routes.draw do
+  resources :users
+
+  root to: 'main#bac', as: 'bac'
+
+  get "login" => "auth#login", :as => :login
+  get "logout" => "auth#logout", :as => :logout
+  post "do_login" => "auth#do_login", :as => :do_login
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

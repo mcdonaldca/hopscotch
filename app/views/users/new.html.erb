@@ -1,0 +1,24 @@
+<h2> New user </h2>
+
+<%= form_for @user do |f| %>
+ <% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= f.label :username, "Username:" %> <%= f.text_field :username %><br />
+  <%= f.label :email, "Email:" %> <%= f.text_field :email %><br />
+  <%= f.label :password, "Password:" %> <%= f.password_field :password %><br />
+  Confirm: <%= f.password_field :password_confirmation %>  <br />
+  <%= f.label :first, "First name:" %> <%= f.text_field :first %><br />
+  <%= f.label :last, "Last name:" %> <%= f.text_field :last %><br />
+  <%= f.label :phone, "Phone:" %> <%= f.text_field :phone %><br />
+  <%= f.submit %>
+<% end %>
+<hr />
+<%= link_to "Cancel", bac_url %>
