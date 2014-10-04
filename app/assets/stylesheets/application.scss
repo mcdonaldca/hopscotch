@@ -12,25 +12,95 @@
  *= require_tree .
  */
 
- body {
+ @mixin transition($trans) {
+	-webkit-transition: $trans 0.15s ease-in;
+	-moz-webkit-transition: $trans 0.15s ease-in;
+	-o-webkit-transition: $trans 0.15s ease-in;
+	transition: $trans 0.15s ease-in;
+}
+
+* {
+	margin: 0;
+}
+
+ body, html {
  	margin: 0;
  	padding: 0;
+ 	width: 100%;
+ 	height: 100%;
+
+ 	font-family: Lato;
  }
 
  #core {
  	width: 100%;
- 	max-width: 600px;
- 	margin: 0 auto;
+ 	max-width: 550px;
  	background: #F5E5C0;
+ 	position: relative;
+
+ 	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
  }
 
 header {
+	text-align: center;
+	position: relative;
 	height: 4em;
 	background: #2F3440;
 
 	nav {
 		display: inline-block;
+		position: absolute;
+		left: 0;
+
+		.menu-icon {
+			width: 2em;
+			height: 2em;
+			padding: 1em;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
 	}
+
+	ul {
+			display: none;
+			padding: 0;
+			margin: -2px 0 0 0;
+			float: left;
+			width: 100%;
+			background: #3F5666;
+
+			li {
+				width: 100%;
+				list-style: none;
+				text-align: center;
+				padding: .75em 0;
+
+				border-bottom: 1px darken(#3F5666, 10%) solid;
+
+				a {
+					display: inline-block;
+					color: #F5E5C0;
+					text-decoration: none;
+					width: 100%;
+				}
+
+				@include transition(background);
+
+				&:hover {
+					background: darken(#3F5666, 10%);
+				}
+			}
+		}
 
 	#logo {
 		display: inline-block;
@@ -45,4 +115,8 @@ header {
 	#drunk-o-meter {
 		display: inline-block;
 	}
+}
+
+footer, .push {
+	height: 155px; /* .push must be the same height as .footer */
 }

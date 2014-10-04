@@ -1,4 +1,5 @@
 Hopscotch::Application.routes.draw do
+  
   resources :users
 
   root to: 'main#bac', as: 'bac'

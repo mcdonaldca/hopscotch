@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Hopscotch</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Grand+Hotel' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -10,15 +11,29 @@
 	<div id="core">
 		<header>
 			<nav>
+				<div class="menu-icon">
+					<%= image_tag "menu-icon.png" %>
+				</div>
 			</nav>
 			<div id="logo">
 				<%= image_tag "hopscotch.png" %>
 			</div>
 			<div id="drunk-o-meter">
 			</div>
+			<ul>
+	 				<li><a href="events.php">Profile</a></li>
+	 				<% unless session[:user_id].nil? %>
+	 				<li><%= link_to "Profile", logout_url %></li>
+	 				<% end %>
+	 				<li><%= link_to "Logout", logout_url %></li>
+	 			</ul>
 		</header>
 
 		<%= yield %>
+		<div class="push"></div>
 	</div>
+	<footer>
+	</footer>
+	<%= javascript_include_tag "nav"%>
 </body>
 </html>
