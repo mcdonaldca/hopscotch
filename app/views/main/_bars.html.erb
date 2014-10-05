@@ -1,11 +1,43 @@
+<% if User.find(session[:user_id]).booze_level < 2 %>
+
 <% @barlist.each do |bar| %>
-	<div>
-		<p>Name: <%= bar[:name] %> </p>
-		<p>Address: <%= bar[:address] %> </p>
-		<p>Latitude: <%= bar[:lat] %> </p>
-		<p>Longitude: <%= bar[:long] %> </p>
-		<p>Rating: <%= bar[:rating] %> </p>
-		<p>Type: <%= bar[:type] %> </p>
+	<div class="place-item">
+		<div class="icon-logo restaurant">
+			<% if bar[:type] == "wine" %>
+				<img src="https://abs.twimg.com/emoji/v1/72x72/1f377.png">
+			<% else %>
+				<img src="https://abs.twimg.com/emoji/v1/72x72/1f378.png">
+			<% end %>
+		</div>
+		<div class="info">
+			<h3><%= bar[:name] %></h3>
+			<p><%= bar[:address] %> </p>
+			<p>Rating: <%= bar[:rating] %> </p>
+			<% @uberurl = @uberurl_1 + @uberurl_2 + bar[:lat].to_s + @uberurl_3 + bar[:long].to_s %>
+			<%= link_to "Uber", @uberurl, :class => "uber-button" %>
+		</div>
 		<br />
-	</div>
+	</div><br>
+<% end %>
+
+<% else %>
+
+<% @barlist.each do |bar| %>
+	<div class="place-item">
+		<div class="icon-logo restaurant">
+			<% if bar[:type] == "wine" %>
+				<img src="https://abs.twimg.com/emoji/v1/72x72/1f377.png">
+			<% else %>
+				<img src="https://abs.twimg.com/emoji/v1/72x72/1f378.png">
+			<% end %>
+		</div>
+		<div class="info big">
+			<h3 class="big"><%= bar[:name] %></h3>
+			<% @uberurl = @uberurl_1 + @uberurl_2 + bar[:lat].to_s + @uberurl_3 + bar[:long].to_s %>
+			<%= link_to "Uber", @uberurl, :class => "uber-button big" %>
+		</div>
+		<br />
+	</div><br><br>
+<% end %>
+
 <% end %>

@@ -71,9 +71,22 @@ class MainController < ApplicationController
 	def choose
 		@user = User.find(session[:user_id])
 		@time = session[:timestamp]
+		bars()
+		uber()
 	end
 
 	def bars
+		user = User.find(session[:user_id])
+		firstname = user.first
+		lastname = user.last
+		phone = user.phone
+
+		#uberdestination = "229%20Commonwealth%20Ave%2C%20Boston%2C%20MA%2002116"
+		@uberurl_1 = "https://m.uber.com/sign-up?client_id=a-RTv0w8VfNjNR0oTUio1LXBDrjrBIUx"
+		@uberurl_1 += "&first_name="+firstname+"&last_name="+lastname+"&mobile_phone="+phone #+"&dropoff_address="+uberdestination
+		@uberurl_2 = "&dropoff_latitude="
+		@uberurl_3 = "&dropoff_longitude="
+
 		# TODO: get actual lat and long from user
 		lat = "42.360986"
 		long = "-71.096849"

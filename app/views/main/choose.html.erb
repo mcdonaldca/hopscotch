@@ -6,7 +6,7 @@
 	<% elsif @user.booze_level == 2 %>
 		YOU'RE DRUNK! <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f389.png"></div>
 	<% else %>
-		HAMMERED. <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f528.png"></div>
+		HAMMERED <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f528.png"></div>
 	<% end %>
 </h1>
 
@@ -27,12 +27,59 @@
   <%= render "bars"%>
 <% end %>
 
-<% if @user.booze_level == 1 || @user.booze_level == 2 %>
-<% end %>
-
-<% if @user.booze_level == 2 %>
+<% if @user.booze_level == 1 %>
+	<%= link_to bars_url do %>
+		<div class="option-button">
+			<div class="text">
+				KEEP GOING, BRAH
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f379.png"></div>
+			</div>
+		</div>
+	<% end %>
+	<%= link_to food_url do %>
+		<div class="option-button">
+			<div class="text">
+				LATE NITE NOMS
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f374.png"></div>
+			</div>
+		</div>
+	<% end %>
+<% elsif @user.booze_level == 2  %>
+<%= link_to bars_url do %>
+		<div class="option-button two">
+			<div class="text">
+				KEEP GOING, BRAH
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f379.png"></div>
+			</div>
+		</div>
+	<% end %>
+	<%= link_to food_url do %>
+		<div class="option-button two">
+			<div class="text">
+				LATE NITE NOMS
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f374.png"></div>
+			</div>
+		</div>
+	<% end %>
+	<%= link_to @uberurl do %>
+		<div class="option-button two">
+			<div class="text">
+				CALL IT A NIGHT 
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f698.png"></div>
+			</div>
+		</div>
+	<% end %>
 <% end %>
 
 <% if @user.booze_level == 3 %>
+<h2 style="font-size: 3em; margin-top: .3em; padding-bottom: .5em;">Go home, <%= @user.first %>.<br>You're drunk.</h2>
+  <%= link_to @uberurl do %>
+		<div class="option-button three">
+			<div class="text">
+				UBER
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f698.png"></div>
+			</div>
+		</div>
+	<% end %>
 <% end %> 
 

@@ -97,7 +97,7 @@ class HopsController < ApplicationController
 		reg.save
 		user.current_hop = nil
 		user.save
-		redirect_to(@uberurl) and return
+		redirect_to(@uberurl)
 	end
 
 	def end_hop
