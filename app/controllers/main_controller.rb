@@ -1,4 +1,5 @@
 require 'net/http'
+require 'time'
 
 class MainController < ApplicationController
 
@@ -29,6 +30,9 @@ class MainController < ApplicationController
 
 		user = User.find(session[:user_id])
 		user.latest_bac = mostrecentbac
+		# BACtrack knows we're in EST but it thinks EST is 4 hours ahead of where it actually is
+		mostrecenttimestamp = Time.parse(mostrecenttimestamp).advance(:hours => -4).strftime("%Y-%m-%d %H:%M")
+
 		session[:timestamp] = mostrecenttimestamp
 
 		# Find what their drunk emoji should be 
