@@ -23,10 +23,12 @@
 			</nav>
 			<% end %>
 			<div id="logo">
-				<% if User.find(session[:user_id]).booze_level < 2 %>
-					<%= image_tag "hopscotch.png" %>
-				<% else %>
-					<%= image_tag "hopscotch_nite.png" %>
+				<%= link_to bac_url do %>      
+					<% if User.find(session[:user_id]).booze_level < 2 %>
+						<%= image_tag "hopscotch.png" %>
+					<% else %>
+						<%= image_tag "hopscotch_nite.png" %>
+					<% end %>
 				<% end %>
 			</div>
 			<% unless session[:user_id].nil? %>
