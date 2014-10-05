@@ -1,6 +1,34 @@
-<%= session[:user_id] %>
+<% if @booze_level == 0 %>
 
+<div class="bac-button one">
+	<div class="text">HOW DRUNK AM I?</div>
+</div>
 
+<% elsif @booze_level == 1 %>
+
+<div class="bac-button zero">
+	<div class="text">WHAT IS MY BAC?</div>
+</div>
+
+<% elsif @booze_level == 2 %>
+
+<div class="bac-button two">
+	<div class="text">AM I DRUNK?</div>
+</div>
+
+<% else %>
+
+<div class="bac-button three">
+	<div class="text">DRUNK?</div>
+</div>
+
+<% end %>
 
 <div class="barstools">
 </div>
+
+<script>
+<% if User.find(session[:user_id]).booze_level > 1 %>
+	$(".barstools").css("background-image",  "url(<%= asset_path 'barstool_nite.png' %>)");
+<% end %>
+</script>

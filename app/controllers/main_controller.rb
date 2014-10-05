@@ -5,6 +5,7 @@ class MainController < ApplicationController
 	before_filter :get_logged_in_user
 
 	def bac
+		@booze_level = User.find(session[:user_id]).booze_level
 	end
 
 	def getbac
