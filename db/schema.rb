@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 20141005115348) do
     t.string   "first"
     t.string   "last"
     t.string   "phone"
+    t.string   "bactrack_id",                         default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "bactrack_id",                         default: ""
     t.string   "drunk_emoji",                         default: "https://abs.twimg.com/emoji/v1/72x72/1f610.png"
     t.integer  "booze_level",                         default: 0
     t.decimal  "latest_bac",  precision: 3, scale: 2, default: 0.0
