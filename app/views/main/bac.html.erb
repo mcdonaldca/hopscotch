@@ -1,26 +1,34 @@
 <% if @booze_level == 0 %>
 
-<div class="bac-button one">
-	<div class="text">HOW DRUNK AM I?</div>
-</div>
+<%= link_to get_bac_url do %> 
+	<div class="bac-button zero">
+		<div class="text">WHAT IS MY BAC?</div>
+	</div>
+<% end %>
 
 <% elsif @booze_level == 1 %>
 
-<div class="bac-button zero">
-	<div class="text">WHAT IS MY BAC?</div>
-</div>
+<%= link_to get_bac_url do %>  
+	<div class="bac-button one">
+		<div class="text">HOW DRUNK AM I?</div>
+	</div>
+<% end %>
 
 <% elsif @booze_level == 2 %>
 
-<div class="bac-button two">
-	<div class="text">AM I DRUNK?</div>
-</div>
+<%= link_to get_bac_url do %> 
+	<div class="bac-button two">
+		<div class="text">AM I DRUNK?</div>
+	</div>
+<% end %>
 
 <% else %>
 
-<div class="bac-button three">
-	<div class="text">DRUNK?</div>
-</div>
+<%= link_to get_bac_url do %> 
+	<div class="bac-button three">
+		<div class="text">DRUNK?</div>
+	</div>
+<% end %>
 
 <% end %>
 

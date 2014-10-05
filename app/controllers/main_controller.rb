@@ -8,7 +8,7 @@ class MainController < ApplicationController
 		@booze_level = User.find(session[:user_id]).booze_level
 	end
 
-	def getbac
+	def get_bac
 		# hard-coded latitude and longitude for now
 		response = Net::HTTP.get_response(URI("http://mobile.bactrack.com/v1/readings/?lat_center=42.358675&lng_center=-71.096509&radius_meters=1000&format=json")).body
 		# a few times it returned a 400 Bad Request message instead of content, so this checks for that
@@ -27,7 +27,6 @@ class MainController < ApplicationController
 			end
 		end
 
-
 		user = User.find(session[:user_id])
 		user.latest_bac = mostrecentbac
 		session[:timestamp] = mostrecenttimestamp
@@ -38,20 +37,26 @@ class MainController < ApplicationController
 		# Find what their user interface should look like
 		user.booze_level = get_booze_level(mostrecentbac)
 
+		user.save
 		redirect_to choose_url
 	end
 
-	def setbac
-		mostrecentbac = params[:bac]
-		user.latest_bac = mostrecentbac
+	def admin
+	end
+
+	def set_bac
+		@mostrecentbac = params[:bac].to_f
+		@user = User.find(session[:user_id])
+		@user.latest_bac = @mostrecentbac
 		session[:timestamp] = nil
 
 		# Find what their drunk emoji should be 
-		user.drunk_emoji = get_drunk_emoji(mostrecentbac)
+		@user.drunk_emoji = get_drunk_emoji(@mostrecentbac)
 
 		# Find what their user interface should look like
-		user.booze_level = get_booze_level(mostrecentbac)
+		@user.booze_level = get_booze_level(@mostrecentbac)
 
+		@user.save
 		redirect_to choose_url
 	end
 
