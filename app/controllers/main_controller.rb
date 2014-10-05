@@ -10,6 +10,7 @@ class MainController < ApplicationController
 	end
 
 	def get_bac
+		user = User.find(session[:user_id])
 		# hard-coded latitude and longitude for now
 		response = Net::HTTP.get_response(URI("http://mobile.bactrack.com/v1/readings/?lat_center=42.358675&lng_center=-71.096509&radius_meters=1000&format=json")).body
 		# a few times it returned a 400 Bad Request message instead of content, so this checks for that
@@ -20,7 +21,7 @@ class MainController < ApplicationController
 			unless bacobjects.nil?
 				bacobjects.each do |b|
 					# 10261 should become the actual user's BACtrack id
-					if b["person"] == "/internal_v1/users/10261/" && b["timestamp"] > mostrecenttimestamp
+					if b["person"] == "/internal_v1/users/" + user.bactrack_id + "/" && b["timestamp"] > mostrecenttimestamp
 						mostrecentbac = b["bac_level"]
 						mostrecenttimestamp = b["timestamp"]
 					end
@@ -31,8 +32,7 @@ class MainController < ApplicationController
 		user = User.find(session[:user_id])
 		user.latest_bac = mostrecentbac
 		# BACtrack knows we're in EST but it thinks EST is 4 hours ahead of where it actually is
-		mostrecenttimestamp = Time.parse(mostrecenttimestamp).advance(:hours => -4).strftime("%Y-%m-%d %H:%M")
-
+		mostrecenttimestamp = Time.parse(mostrecenttimestamp).advance(:hours => -4).strftime("%l:%M%p %B %e, %Y")
 		session[:timestamp] = mostrecenttimestamp
 
 		# Find what their drunk emoji should be 

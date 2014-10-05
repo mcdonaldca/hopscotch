@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  hop_id: 1
+  final_destination_lat: MyString
+  final_destination_long: MyString
+  active: false
+
+two:
+  user_id: 1
+  hop_id: 1
+  final_destination_lat: MyString
+  final_destination_long: MyString
+  active: false

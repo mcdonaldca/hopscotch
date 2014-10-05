@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
   validates :first, :presence => true
   validates :last, :presence => true
   validates :phone, :presence => true
+
+  has_many :registrations
+  has_many :hops, through: :registrations
 end

@@ -1,5 +1,9 @@
 Hopscotch::Application.routes.draw do
   
+  resources :registrations
+
+  resources :hops
+
   resources :users
 
   root to: 'main#bac', as: 'bac'

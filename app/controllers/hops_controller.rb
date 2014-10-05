@@ -1,0 +1,2 @@
+class HopsController < ApplicationController
+end
