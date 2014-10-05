@@ -14,12 +14,20 @@
 			<% unless session[:user_id].nil? %>
 			<nav>
 				<div class="menu-icon">
-					<%= image_tag "menu-icon.png" %>
+					<% if User.find(session[:user_id]).booze_level < 2 %>
+						<%= image_tag "menu-icon.png" %>
+					<% else %>
+						<%= image_tag "menu-icon_nite.png" %>
+					<% end %>
 				</div>
 			</nav>
 			<% end %>
 			<div id="logo">
-				<%= image_tag "hopscotch.png" %>
+				<% if User.find(session[:user_id]).booze_level < 2 %>
+					<%= image_tag "hopscotch.png" %>
+				<% else %>
+					<%= image_tag "hopscotch_nite.png" %>
+				<% end %>
 			</div>
 			<% unless session[:user_id].nil? %>
 			<div id="drunk-o-meter">
@@ -43,5 +51,11 @@
 	<footer>
 	</footer>
 	<%= javascript_include_tag "nav"%>
+	<script>
+	<% if User.find(session[:user_id]).booze_level > 1 %>
+		$("#core").css("background", "#2F3440");
+		$("header").css("background", "#3F5666");
+	<% end %>
+	</script>
 </body>
 </html>
