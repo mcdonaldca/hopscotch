@@ -1,0 +1,30 @@
+<h1>PLAN YOUR ADVENTURE</h1>
+
+<%= form_tag set_locations_url, method: "post" do %>
+
+	<% @barlist.each do |bar| %>
+		<div class="place-item">
+			<div class="icon-logo restaurant">
+				<% if bar[:type] == "wine" %>
+					<img src="https://abs.twimg.com/emoji/v1/72x72/1f377.png">
+				<% else %>
+					<img src="https://abs.twimg.com/emoji/v1/72x72/1f378.png">
+				<% end %>
+			</div>
+			<div class="info">
+				<h3><%= bar[:name] %></h3>
+				<p><%= bar[:address] %> </p>
+				<p>Rating: <%= bar[:rating] %> </p>
+			</div>
+			<br />
+			<input type="checkbox" name="locations[]" value="<%= bar[:name] %>">
+		</div><br>
+	<% end %>
+
+	<div class="option-button">
+		<div class="text">
+			<%= submit_tag "SELECT LOCATIONS", :class => "submit" %>
+		</div>
+	</div>
+<% end %>
+

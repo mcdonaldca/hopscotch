@@ -1,0 +1,20 @@
+<h1>SET A SCHEDULE</h1>
+
+
+<%= form_tag plan_created_url, method: "post" do %>
+<div class="set_locations">
+  <% @x = 0 %>
+	<% @places.each do |place| %>
+		<%= label @x, place %>
+		<%= text_field_tag @x, nil, placeholder: 'time' %>
+		<%= hidden_field_tag @x.to_s + "-name", place %><br>
+		<% @x += 1 %>
+	<% end %>
+</div>
+
+	<div class="option-button">
+		<div class="text">
+			<%= submit_tag "SEAL THE DEAL", :class => "submit" %>
+		</div>
+	</div>
+<% end %>

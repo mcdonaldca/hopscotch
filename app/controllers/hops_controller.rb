@@ -33,8 +33,78 @@ class HopsController < ApplicationController
 			else
 				render action "new"
 			end
+		elsif handle == "plan"
+			@hop.planned = true
+			@hop.code = (0...4).map { ('a'..'z').to_a[rand(26)] }.join
+			@hop.save
+
+			@registration = Registration.new
+			@registration.user_id = session[:user_id]
+			@registration.hop_id = @hop.id
+			@registration.active = true
+			@registration.save
+			#session[:reg_id] = @registration.id
+
+			@user = User.find(session[:user_id])
+			@user.current_hop = @registration.id
 			
+			if @user.save 
+				redirect_to destination_url
+			else
+				render action "new"
+			end
 		end
+	end
+
+	def pick_locations
+		# TODO: get actual lat and long from user
+		lat = "42.360986"
+		long = "-71.096849"
+		max_width = "100" #measured in px
+		bars_request_string = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBaaEBm7WetJlxmSCcShqvWSqttq63LTB8&location="+lat+","+long+"&rankby=distance&types=bar|night_club"
+		bars_uri = URI.parse(URI.encode(bars_request_string))
+		bars_https = Net::HTTP.new(bars_uri.host, bars_uri.port)
+		bars_https.use_ssl = true
+		bars_https.verify_mode = OpenSSL::SSL::VERIFY_NONE # this is NOT secure but Google's API is a free service and we aren't sharing real user data
+		bars_request = Net::HTTP::Get.new(bars_uri.request_uri)
+		bars_response = bars_https.request(bars_request).body
+		results = JSON.parse(bars_response)["results"]
+		@barlist = Array.new
+		results.each do |r|
+			barname = r["name"]
+			baraddress = r["vicinity"]
+			barlat = r["geometry"]["location"]["lat"]
+			barlong = r["geometry"]["location"]["lng"]
+			barrating = r["rating"]
+			baricon = r["icon"]
+			if baricon.include? "wine"
+				bartype = "wine"
+			else
+				bartype = "bar"
+			end
+			@barlist << {:name => barname, :address => baraddress, :lat => barlat, :long => barlong, :rating => barrating, :type => bartype}
+		end
+	end
+
+	def set_locations
+		@locations = Array.new
+		@places = params[:locations]
+	end
+
+	def plan_created
+		@params = params
+		x = 0
+
+		while params[@x.to_s] != nil do
+			loc = Location.new
+			loc.name = params[@x.to_s + "-name"]
+			loc.time = params[@x.to_s]
+			loc.registration_id = User.find(session[:user_id]).current_hop
+			loc.save
+			x += 1
+		end
+
+		redirect_to current_hop_url
 	end
 
 	def destination
@@ -56,6 +126,8 @@ class HopsController < ApplicationController
 		if reg.save
 			if reg.hop.planned == false
 				redirect_to bac_url
+			elsif reg.hop.planned == true
+				redirect_to pick_locations_url
 			end
 		end
 	end

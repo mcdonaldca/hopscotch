@@ -29,6 +29,9 @@ Hopscotch::Application.routes.draw do
   get "hops/end" => "hops#end_hop", :as => :end_hop
   get "hops/uber_end" => "hops#uber_end", :as => :uber_end
   post "hops/create" => "hops#create", :as => :create_hop
+  get "hops/locations" => "hops#pick_locations", :as => :pick_locations
+  post "hops/set" => "hops#set_locations", :as => :set_locations
+  post "hops/created" => "hops#plan_created", :as => :plan_created
   get "hops/destination" => "hops#destination", :as => :destination
   post "hops/save_destination" => "hops#save_destination", :as => :save_destination
 
