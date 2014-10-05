@@ -11,10 +11,12 @@ Hopscotch::Application.routes.draw do
 
   get "bac" => "main#get_bac", :as => :get_bac
   post "bac" => "main#set_bac", :as => :set_bac
-  get "options" => "main#choose", :as => :choose
   get "admin" => "main#admin", :as => :admin
-  get "uber" => "main#uber"
 
+  get "options" => "main#choose", :as => :choose
+  get "options/bars" => "main#bars", :as => :bars
+  get "options/food" => "main#food", :as => :food
+  get "options/uber" => "main#uber", :as => :uber
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

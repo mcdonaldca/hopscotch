@@ -23,7 +23,8 @@
 <% end %>
 
 <% if @user.booze_level == 0 %>
-<h2>You look like you could use a drink. <div class="option-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f379.png"></div></h2>
+  <h2>You look like you could use a drink. <div class="option-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f379.png"></div></h2>
+  <%= render "bars"%>
 <% end %>
 
 <% if @user.booze_level == 1 || @user.booze_level == 2 %>

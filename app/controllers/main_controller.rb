@@ -69,6 +69,12 @@ class MainController < ApplicationController
 		@time = session[:timestamp]
 	end
 
+	def bars
+	end
+
+	def food
+	end
+
 	def uber
 		
 		firstname = "Erin"
