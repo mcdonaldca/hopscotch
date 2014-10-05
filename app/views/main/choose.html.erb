@@ -1,12 +1,12 @@
 <h1>
 	<% if @user.booze_level == 0 %>
-		SOBER SALLY
+		SOBER SALLY <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f481.png"></div>
 	<% elsif @user.booze_level == 1 %>
-		TIPSY TURVEY
+		TIPSY TURVEY <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f4ef.png"></div>
 	<% elsif @user.booze_level == 2 %>
-		YOU'RE DRUNK!
+		YOU'RE DRUNK! <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f389.png"></div>
 	<% else %>
-		HAMMERED.
+		HAMMERED. <div class="label-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f528.png"></div>
 	<% end %>
 </h1>
 
@@ -21,4 +21,17 @@
 <% unless @time.nil? %>
 	<p class='timestamp'><%= @time %></p>
 <% end %>
+
+<% if @user.booze_level == 0 %>
+<h2>You look like you could use a drink. <div class="option-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f379.png"></div></h2>
+<% end %>
+
+<% if @user.booze_level == 1 || @user.booze_level == 2 %>
+<% end %>
+
+<% if @user.booze_level == 2 %>
+<% end %>
+
+<% if @user.booze_level == 3 %>
+<% end %> 
 
