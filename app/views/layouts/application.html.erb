@@ -5,28 +5,36 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Grand+Hotel' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= favicon_link_tag 'favicon.png', :rel => 'favicon', :type => 'image/png' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	<div id="core">
 		<header>
+			<% unless session[:user_id].nil? %>
 			<nav>
 				<div class="menu-icon">
 					<%= image_tag "menu-icon.png" %>
 				</div>
 			</nav>
+			<% end %>
 			<div id="logo">
 				<%= image_tag "hopscotch.png" %>
 			</div>
+			<% unless session[:user_id].nil? %>
 			<div id="drunk-o-meter">
+				<!--div class="text"-->
+					<!-- DRUNK 'O' METER -->
+				<!--/div-->
+				<div id="drunk-emoji">
+					<img src="<%= User.find(session[:user_id]).drunk_emoji %>">
+				</div>
 			</div>
 			<ul>
-	 				<li><a href="events.php">Profile</a></li>
-	 				<% unless session[:user_id].nil? %>
 	 				<li><%= link_to "Profile", logout_url %></li>
-	 				<% end %>
 	 				<li><%= link_to "Logout", logout_url %></li>
-	 			</ul>
+	 		</ul>
+	 		<% end %>
 		</header>
 
 		<%= yield %>

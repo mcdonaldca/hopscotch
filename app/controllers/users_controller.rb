@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
 	def new
     @user = User.new
   end
@@ -13,5 +17,11 @@ class UsersController < ApplicationController
     else
       render action: 'new'
     end
+  end
+
+  def destroy
+    @user = User.find params[:id]
+    @user.destroy
+    redirect_to users_url
   end
 end
