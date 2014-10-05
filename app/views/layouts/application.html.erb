@@ -8,9 +8,21 @@
   <%= favicon_link_tag 'favicon.png' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-	<div id="core">
-		<header>
+<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+	<body>
+<% else %>
+	<body class="nite">
+<% end %>
+	<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+		<div id="core">
+	<% else %>
+		<div id="core" class="nite">
+	<% end %>
+		<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+			<header>
+		<% else %>
+			<header class="nite">
+		<% end %>
 			<% unless session[:user_id].nil? %>
 			<nav>
 				<div class="menu-icon">
@@ -53,11 +65,5 @@
 	<footer>
 	</footer>
 	<%= javascript_include_tag "nav"%>
-	<script>
-	<% if !session[:user_id].nil? && User.find(session[:user_id]).booze_level > 1 %>
-		$("#core").css("background", "#2F3440");
-		$("header").css("background", "#3F5666");
-	<% end %>
-	</script>
 </body>
 </html>

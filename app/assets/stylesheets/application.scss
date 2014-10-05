@@ -28,8 +28,15 @@
  	padding: 0;
  	width: 100%;
  	height: 100%;
+ }
 
+ body {
  	font-family: Lato;
+ 	color: black;
+
+ 	&.nite {
+ 		color: #F5E5C0;
+ 	}
  }
 
  #core {
@@ -42,6 +49,10 @@
 	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
 	height: 100%;
 	margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+
+	&.nite {
+		background: #2F3440;
+	}
  }
 
 header {
@@ -49,6 +60,10 @@ header {
 	position: relative;
 	height: 4em;
 	background: #2F3440;
+
+	&.nite {
+		background: #3F5666;
+	}
 
 	nav {
 		display: inline-block;
@@ -132,6 +147,12 @@ header {
 			}
 		}
 	}
+}
+
+h1 {
+	font-size: 4em;
+	text-align: center;
+	margin-top: .3em;
 }
 
 footer, .push {

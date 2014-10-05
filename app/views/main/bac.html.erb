@@ -18,7 +18,7 @@
 
 <%= link_to get_bac_url do %> 
 	<div class="bac-button two">
-		<div class="text">AM I DRUNK?</div>
+		<div class="text">AM &nbsp;I&nbsp; DRUNK?</div>
 	</div>
 <% end %>
 
@@ -32,11 +32,10 @@
 
 <% end %>
 
-<div class="barstools">
-</div>
-
-<script>
-<% if User.find(session[:user_id]).booze_level > 1 %>
-	$(".barstools").css("background-image",  "url(<%= asset_path 'barstool_nite.png' %>)");
+<% if @booze_level > 1 %>
+	<div class="barstools nite">
+	</div>
+<% else %>
+	<div class="barstools">
+	</div>
 <% end %>
-</script>
