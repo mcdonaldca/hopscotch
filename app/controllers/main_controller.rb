@@ -65,6 +65,18 @@ class MainController < ApplicationController
 		@time = session[:timestamp]
 	end
 
+	def uber
+		
+		firstname = "Erin"
+		lastname = "Hoffman"
+		phone = "3174167556"
+		#uberdestination = "229%20Commonwealth%20Ave%2C%20Boston%2C%20MA%2002116"
+		@uberurl = "https://m.uber.com/sign-up?client_id=a-RTv0w8VfNjNR0oTUio1LXBDrjrBIUx"
+		@uberurl += "&first_name="+firstname+"&last_name="+lastname+"&mobile_phone="+phone #+"&dropoff_address="+uberdestination
+		@uberurl += "&dropoff_latitude=42.351248&dropoff_longitude=-71.082297"
+
+	end
+
 	def get_booze_level(bac)
 		if bac == 0
 			return 0

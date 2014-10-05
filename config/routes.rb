@@ -7,11 +7,14 @@ Hopscotch::Application.routes.draw do
   get "login" => "auth#login", :as => :login
   get "logout" => "auth#logout", :as => :logout
   post "do_login" => "auth#do_login", :as => :do_login
+  
 
   get "bac" => "main#get_bac", :as => :get_bac
   post "bac" => "main#set_bac", :as => :set_bac
   get "options" => "main#choose", :as => :choose
   get "admin" => "main#admin", :as => :admin
+  get "uber" => "main#uber"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
