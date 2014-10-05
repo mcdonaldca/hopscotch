@@ -14,7 +14,7 @@
 			<p><%= bar[:address] %> </p>
 			<p>Rating: <%= bar[:rating] %> </p>
 			<% @uberurl = @uberurl_1 + @uberurl_2 + bar[:lat].to_s + @uberurl_3 + bar[:long].to_s %>
-			<%= link_to "Uber", @uberurl, :class => "uber-button" %>
+			<%= link_to "Uber", @uberurl, :class => "uber-button", :target => "_blank " %>
 		</div>
 		<br />
 	</div><br>

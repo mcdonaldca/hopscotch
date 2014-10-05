@@ -12,6 +12,7 @@
 	<% end %>
 </div>
 
+<%= hidden_field_tag 'count', @x - 1 %>
 	<div class="option-button">
 		<div class="text">
 			<%= submit_tag "SEAL THE DEAL", :class => "submit" %>

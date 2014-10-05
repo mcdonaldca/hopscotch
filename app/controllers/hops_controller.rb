@@ -87,21 +87,20 @@ class HopsController < ApplicationController
 	end
 
 	def set_locations
-		@locations = Array.new
 		@places = params[:locations]
 	end
 
 	def plan_created
 		@params = params
-		x = 0
+		@count = params["count"].to_i
 
-		while params[@x.to_s] != nil do
-			loc = Location.new
-			loc.name = params[@x.to_s + "-name"]
-			loc.time = params[@x.to_s]
-			loc.registration_id = User.find(session[:user_id]).current_hop
-			loc.save
-			x += 1
+		for i in 0..@count
+		  @loc = Location.new
+			@loc.name = params[@x.to_s + "-name"]
+			@loc.time = params[@x.to_s]
+			@loc.registration_id = User.find(session[:user_id]).current_hop
+			@loc.save
+			##SLEEPSCOTCH HERE
 		end
 
 		redirect_to current_hop_url
@@ -137,7 +136,7 @@ class HopsController < ApplicationController
 		if @user.current_hop.nil?
 			redirect_to new_hop_url
 		end
-		#@hop = Hops.find(@user.current_hop)
+		@reg = Registration.find(@user.current_hop)
 	end
 
 	def leave
