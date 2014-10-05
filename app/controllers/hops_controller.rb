@@ -96,8 +96,8 @@ class HopsController < ApplicationController
 
 		for i in 0..@count
 		  @loc = Location.new
-			@loc.name = params[@x.to_s + "-name"]
-			@loc.time = params[@x.to_s]
+			@loc.name = params[i.to_s + "-name"].to_s
+			@loc.time = params[i.to_s].to_s
 			@loc.registration_id = User.find(session[:user_id]).current_hop
 			@loc.save
 			##SLEEPSCOTCH HERE

@@ -31,7 +31,7 @@ Hopscotch::Application.routes.draw do
   post "hops/create" => "hops#create", :as => :create_hop
   get "hops/locations" => "hops#pick_locations", :as => :pick_locations
   post "hops/set" => "hops#set_locations", :as => :set_locations
-  post "hops/created" => "hops#plan_created", :as => :plan_created
+  get "hops/planned" => "hops#plan_created", :as => :plan_created
   get "hops/destination" => "hops#destination", :as => :destination
   post "hops/save_destination" => "hops#save_destination", :as => :save_destination
 

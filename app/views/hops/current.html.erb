@@ -1,5 +1,7 @@
 <h1>HOPSCOTCH</h1>
 
-<%= @reg.locations.each do |loc| %>
-	<%= loc %>
+<ul>
+<% @reg.locations.each do |loc| %>
+	<li><%= loc.name %> <b><%= loc.time %></b></li>
 <% end %>
+</ul>
