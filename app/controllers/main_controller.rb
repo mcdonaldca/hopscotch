@@ -61,6 +61,8 @@ class MainController < ApplicationController
 	end
 
 	def choose
+		@bac = User.find(session[:user_id]).latest_bac
+		@time = session[:timestamp]
 	end
 
 	def get_booze_level(bac)
