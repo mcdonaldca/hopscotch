@@ -101,6 +101,8 @@ class HopsController < ApplicationController
 			@loc.registration_id = User.find(session[:user_id]).current_hop
 			@loc.save
 			##SLEEPSCOTCH HERE
+			plan_uri = URI.parse("http://sleepscotch-hackmit.herokuapp.com/receive/10:01am/Harpers/+3174167556")
+			Net::HTTP.new(plan_uri.host, plan_uri.port)
 		end
 
 		redirect_to current_hop_url
