@@ -10,6 +10,10 @@
 	bottom: 0;
 	background-image:  url(<%= asset_path 'barstool.png' %>);
 	background-repeat: repeat-x;
+
+	&.nite {
+		background-image: url(<%= asset_path 'barstool_nite.png' %>);
+	}
 }
 
 a {
@@ -72,4 +76,15 @@ a {
 			padding-top: .55em;
 		}
 	}
+}
+
+h1#bac {
+	color: #EA6045;
+	margin-top: -.15em;
+}
+
+.timestamp {
+	width: 100%;
+	text-align: center;
+	color: #3F5666;
 }

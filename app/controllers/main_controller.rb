@@ -65,7 +65,7 @@ class MainController < ApplicationController
 	end
 
 	def choose
-		@bac = User.find(session[:user_id]).latest_bac
+		@user = User.find(session[:user_id])
 		@time = session[:timestamp]
 	end
 
@@ -108,7 +108,7 @@ class MainController < ApplicationController
 			return "https://abs.twimg.com/emoji/v1/72x72/1f61b.png"
 		elsif bac < 0.09
 			return "https://abs.twimg.com/emoji/v1/72x72/1f61c.png"
-		elsif bac < 0.12
+		elsif bac < 0.13
 			return "https://abs.twimg.com/emoji/v1/72x72/1f61d.png"
 		else
 			return "https://abs.twimg.com/emoji/v1/72x72/1f632.png"

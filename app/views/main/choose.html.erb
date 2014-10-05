@@ -1,4 +1,24 @@
-<p>Most Recent BAC:</p>
-<%= @bac %>
-<p>Time Stamp:</p>
-<%= @time %>
+<h1>
+	<% if @user.booze_level == 0 %>
+		SOBER SALLY
+	<% elsif @user.booze_level == 1 %>
+		TIPSY TURVEY
+	<% elsif @user.booze_level == 2 %>
+		YOU'RE DRUNK!
+	<% else %>
+		HAMMERED.
+	<% end %>
+</h1>
+
+<% if @user.booze_level < 2 %>
+	<h1 id="bac">
+<% else %>
+	<h1 id="bac" class="nite">
+<% end %>
+	<%= @user.latest_bac %>
+</h1>
+
+<% unless @time.nil? %>
+	<p class='timestamp'><%= @time %></p>
+<% end %>
+
