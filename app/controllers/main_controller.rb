@@ -70,6 +70,33 @@ class MainController < ApplicationController
 	end
 
 	def bars
+		# TODO: get actual lat and long from user
+		lat = "42.360986"
+		long = "-71.096849"
+		max_width = "100" #measured in px
+		bars_request_string = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBaaEBm7WetJlxmSCcShqvWSqttq63LTB8&location="+lat+","+long+"&rankby=distance&types=bar|night_club"
+		bars_uri = URI.parse(URI.encode(bars_request_string))
+		bars_https = Net::HTTP.new(bars_uri.host, bars_uri.port)
+		bars_https.use_ssl = true
+		bars_https.verify_mode = OpenSSL::SSL::VERIFY_NONE # this is NOT secure but Google's API is a free service and we aren't sharing real user data
+		bars_request = Net::HTTP::Get.new(bars_uri.request_uri)
+		bars_response = bars_https.request(bars_request).body
+		results = JSON.parse(bars_response)["results"]
+		@barlist = Array.new
+		results.each do |r|
+			barname = r["name"]
+			baraddress = r["vicinity"]
+			barlat = r["geometry"]["location"]["lat"]
+			barlong = r["geometry"]["location"]["lng"]
+			barrating = r["rating"]
+			baricon = r["icon"]
+			if baricon.include? "wine"
+				bartype = "wine"
+			else
+				bartype = "bar"
+			end
+			@barlist << {:name => barname, :address => baraddress, :lat => barlat, :long => barlong, :rating => barrating, :type => bartype}
+		end
 	end
 
 	def food

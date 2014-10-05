@@ -1,0 +1,11 @@
+<% @barlist.each do |bar| %>
+	<div>
+		<p>Name: <%= bar[:name] %> </p>
+		<p>Address: <%= bar[:address] %> </p>
+		<p>Latitude: <%= bar[:lat] %> </p>
+		<p>Longitude: <%= bar[:long] %> </p>
+		<p>Rating: <%= bar[:rating] %> </p>
+		<p>Type: <%= bar[:type] %> </p>
+		<br />
+	</div>
+<% end %>
