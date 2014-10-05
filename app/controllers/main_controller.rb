@@ -103,7 +103,7 @@ class MainController < ApplicationController
 	end
 
 	def uber
-		
+		# TODO: read these values from database
 		firstname = "Erin"
 		lastname = "Hoffman"
 		phone = "3174167556"
@@ -112,6 +112,19 @@ class MainController < ApplicationController
 		@uberurl += "&first_name="+firstname+"&last_name="+lastname+"&mobile_phone="+phone #+"&dropoff_address="+uberdestination
 		@uberurl += "&dropoff_latitude=42.351248&dropoff_longitude=-71.082297"
 
+	end
+
+	def twilio
+		# TODO: read this value from database
+		phone = "+13174167556"
+		account_sid = "AC698f80b23e2836098d6f58cf7498e4e0"
+		auth_token = "01d2cb9b9bea47ef35df3b1d08c17eb7"
+		@client = Twilio::REST::Client.new account_sid, auth_token
+		message = @client.account.messages.create(
+			:body => "This is a reminder text from Hopscotch",
+			:to => phone,
+			:from => "+13172520150")
+		puts message.sid
 	end
 
 	def get_booze_level(bac)

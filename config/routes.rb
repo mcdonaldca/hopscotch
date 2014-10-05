@@ -21,6 +21,7 @@ Hopscotch::Application.routes.draw do
   get "options/bars" => "main#bars", :as => :bars
   get "options/food" => "main#food", :as => :food
   get "options/uber" => "main#uber", :as => :uber
+  get "options/twilio" => "main#twilio", :as => :twilio
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
