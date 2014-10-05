@@ -20,6 +20,7 @@ Hopscotch::Application.routes.draw do
   get "options/bars" => "main#bars", :as => :bars
   get "options/food" => "main#food", :as => :food
   get "options/uber" => "main#uber", :as => :uber
+  get "options/twilio" => "main#twilio", :as => :twilio
 
   get "hops" => "hops#index", :as => :hops
   get "hops/new" => "hops#new", :as => :new_hop 

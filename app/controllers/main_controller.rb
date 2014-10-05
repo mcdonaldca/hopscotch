@@ -74,6 +74,33 @@ class MainController < ApplicationController
 	end
 
 	def bars
+		# TODO: get actual lat and long from user
+		lat = "42.360986"
+		long = "-71.096849"
+		max_width = "100" #measured in px
+		bars_request_string = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBaaEBm7WetJlxmSCcShqvWSqttq63LTB8&location="+lat+","+long+"&rankby=distance&types=bar|night_club"
+		bars_uri = URI.parse(URI.encode(bars_request_string))
+		bars_https = Net::HTTP.new(bars_uri.host, bars_uri.port)
+		bars_https.use_ssl = true
+		bars_https.verify_mode = OpenSSL::SSL::VERIFY_NONE # this is NOT secure but Google's API is a free service and we aren't sharing real user data
+		bars_request = Net::HTTP::Get.new(bars_uri.request_uri)
+		bars_response = bars_https.request(bars_request).body
+		results = JSON.parse(bars_response)["results"]
+		@barlist = Array.new
+		results.each do |r|
+			barname = r["name"]
+			baraddress = r["vicinity"]
+			barlat = r["geometry"]["location"]["lat"]
+			barlong = r["geometry"]["location"]["lng"]
+			barrating = r["rating"]
+			baricon = r["icon"]
+			if baricon.include? "wine"
+				bartype = "wine"
+			else
+				bartype = "bar"
+			end
+			@barlist << {:name => barname, :address => baraddress, :lat => barlat, :long => barlong, :rating => barrating, :type => bartype}
+		end
 	end
 
 	def food
@@ -91,6 +118,19 @@ class MainController < ApplicationController
 		@uberurl += "&first_name="+firstname+"&last_name="+lastname+"&mobile_phone="+phone #+"&dropoff_address="+uberdestination
 		@uberurl += "&dropoff_latitude=" + reg.final_destination_lat
 		@uberurl += "&dropoff_longitude=" + reg.final_destination_long
+	end
+
+	def twilio
+		# TODO: read this value from database
+		phone = "+13174167556"
+		account_sid = "AC698f80b23e2836098d6f58cf7498e4e0"
+		auth_token = "01d2cb9b9bea47ef35df3b1d08c17eb7"
+		@client = Twilio::REST::Client.new account_sid, auth_token
+		message = @client.account.messages.create(
+			:body => "This is a reminder text from Hopscotch",
+			:to => phone,
+			:from => "+13172520150")
+		puts message.sid
 	end
 
 	def get_booze_level(bac)
