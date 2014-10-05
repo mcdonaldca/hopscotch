@@ -5,7 +5,7 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Grand+Hotel' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= favicon_link_tag 'favicon.png', :rel => 'favicon', :type => 'image/png' %>
+  <%= favicon_link_tag 'favicon.png' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,7 +14,7 @@
 			<% unless session[:user_id].nil? %>
 			<nav>
 				<div class="menu-icon">
-					<% if User.find(session[:user_id]).booze_level < 2 %>
+					<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
 						<%= image_tag "menu-icon.png" %>
 					<% else %>
 						<%= image_tag "menu-icon_nite.png" %>
@@ -24,7 +24,7 @@
 			<% end %>
 			<div id="logo">
 				<%= link_to bac_url do %>      
-					<% if User.find(session[:user_id]).booze_level < 2 %>
+					<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
 						<%= image_tag "hopscotch.png" %>
 					<% else %>
 						<%= image_tag "hopscotch_nite.png" %>
@@ -54,7 +54,7 @@
 	</footer>
 	<%= javascript_include_tag "nav"%>
 	<script>
-	<% if User.find(session[:user_id]).booze_level > 1 %>
+	<% if !session[:user_id].nil? && User.find(session[:user_id]).booze_level > 1 %>
 		$("#core").css("background", "#2F3440");
 		$("header").css("background", "#3F5666");
 	<% end %>

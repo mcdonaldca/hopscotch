@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141005001348) do
+ActiveRecord::Schema.define(version: 20141005024610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20141005001348) do
     t.string   "bactrack_id",                         default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "latest_bac",  precision: 3, scale: 0, default: 0
     t.string   "drunk_emoji",                         default: "https://abs.twimg.com/emoji/v1/72x72/1f610.png"
     t.integer  "booze_level",                         default: 0
+    t.decimal  "latest_bac",  precision: 3, scale: 2, default: 0.0
   end
 
 end
