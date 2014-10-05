@@ -14,5 +14,4 @@ class ApplicationController < ActionController::Base
       @user = User.find id
     end
   end
-
 end

@@ -8,25 +8,26 @@
   <%= favicon_link_tag 'favicon.png' %>
   <%= csrf_meta_tags %>
 </head>
-<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+<% @user = session[:user_id].nil? ? nil :  User.find(session[:user_id]) %>
+<% if @user.nil? || @user.booze_level < 2 %>
 	<body>
 <% else %>
 	<body class="nite">
 <% end %>
-	<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+	<% if @user.nil? || @user.booze_level < 2 %>
 		<div id="core">
 	<% else %>
 		<div id="core" class="nite">
 	<% end %>
-		<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+		<% if @user.nil? || @user.booze_level < 2 %>
 			<header>
 		<% else %>
 			<header class="nite">
 		<% end %>
-			<% unless session[:user_id].nil? %>
+			<% unless @user.nil? %>
 			<nav>
 				<div class="menu-icon">
-					<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+					<% if @user.nil? || @user.booze_level < 2 %>
 						<%= image_tag "menu-icon.png" %>
 					<% else %>
 						<%= image_tag "menu-icon_nite.png" %>
@@ -36,24 +37,36 @@
 			<% end %>
 			<div id="logo">
 				<%= link_to bac_url do %>      
-					<% if session[:user_id].nil? || User.find(session[:user_id]).booze_level < 2 %>
+					<% if @user.nil? || @user.booze_level < 2 %>
 						<%= image_tag "hopscotch.png" %>
 					<% else %>
 						<%= image_tag "hopscotch_nite.png" %>
 					<% end %>
 				<% end %>
 			</div>
-			<% unless session[:user_id].nil? %>
+			<% unless @user.nil? %>
 			<div id="drunk-o-meter">
 				<!--div class="text"-->
 					<!-- DRUNK 'O' METER -->
 				<!--/div-->
 				<div id="drunk-emoji">
-					<img src="<%= User.find(session[:user_id]).drunk_emoji %>">
+					<img src="<%= @user.drunk_emoji %>">
 				</div>
 			</div>
-			<ul>
-	 				<li><%= link_to "Logout", logout_url %></li>
+			<% if @user.nil? || @user.booze_level < 2 %>
+				<ul>
+			<% else %>
+				<ul class="nite">
+			<% end %>
+				<% if @user.current_hop.nil? %>
+					<li><%= link_to "Begin a Hop", new_hop_url %></li>
+				<% elsif Registration.find(@user.current_hop).hop.planned == false %>
+				  <li><%= link_to "End Hop", leave_hop_url %></li>
+				<% else %>
+				  <li><%= link_to "Current Hop", current_hop_url %></li>
+				  <li><%= link_to "Leave Hop", leave_hop_url %></li>
+				<% end %>
+	 			<li><%= link_to "Logout", logout_url %></li>
 	 		</ul>
 	 		<% end %>
 		</header>

@@ -1,0 +1,13 @@
+<h1>WHERE SHOULD YOU END UP?</h1>
+<p>Please enter the latitude and longitude of your final desination tonight. This is where your Uber driver will deliver you at the end of the night.</p>
+
+<%= form_tag save_destination_url, method: "post" do %>
+	<%= text_field_tag 'latitude', nil, :placeholder => 'Latitude', :class => "latlong" %>
+	<%= text_field_tag 'longitude', nil, :placeholder => 'Longitude', :class => "latlong" %>
+	<div class="option-button">
+		<div class="text">
+			<%= submit_tag "THAT'S THE PLACE", :class => "submit" %> 
+			<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f698.png"></div>
+		</div>
+	</div>
+<% end %>

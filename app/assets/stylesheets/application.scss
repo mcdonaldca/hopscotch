@@ -94,6 +94,22 @@ header {
 			width: 100%;
 			background: #3F5666;
 
+			&.nite {
+				background: #F5E5C0;
+
+				li {
+					border-bottom: 1px darken(#F5E5C0, 10%) solid;
+
+					a {
+						color: #2F3440;
+					}
+
+					&:hover {
+						background: darken(#F5E5C0, 10%);
+					}
+				}
+			}
+
 			li {
 				width: 100%;
 				list-style: none;
@@ -147,6 +163,63 @@ header {
 			}
 		}
 	}
+}
+
+.option-button {
+	background: #F8CA4D;
+	border-right: solid darken(#F8CA4D, 25%) 5px;
+	border-bottom: solid darken(#F8CA4D, 25%) 5px;
+	border-radius: 10px;
+	width: 80%;
+	margin: 2em auto 0;
+	height: 4em;
+
+	&.blue {
+		background: #3F5666;
+		border-right: solid darken(#3F5666, 25%) 5px;
+		border-bottom: solid darken(#3F5666, 25%) 5px;
+
+		.text {
+			color: #F8CA4D;
+		}
+	}
+
+	.text {
+		color: #2F3440;
+		width: 100%;
+		text-align: center;
+		font-size: 2em;
+		padding-top: .4em;	
+	}
+
+	.button-emoji {
+		width: .8em;
+		height: .8em;
+		display: inline-block;
+		padding-left: .25em;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+p {
+	width: 80%;
+	margin: 1em auto 0;
+}
+
+input[type="text"].latlong, input[type="password"].latlong {
+	display: inline-block;
+	width: 80%;
+	margin: .5em 10% 0;
+	height: 1em;
+	padding: .25em 0;
+	border-radius: 10px;
+
+	font-size: 2em;
+	text-align: center;
 }
 
 footer, .push {

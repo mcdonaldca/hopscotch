@@ -1,3 +1,30 @@
 // Place all the styles related to the hops controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.join-hop {
+	margin-top: 7em;
+	width: 100%;
+
+	input[type="text"] {
+		display: inline-block;
+		width: 50%;
+		margin: 0 25%;
+		height: 1em;
+		padding: .25em 0;
+		border-radius: 10px;
+
+		font-size: 2em;
+		text-align: center;
+	}
+}
+
+.submit {
+	background: transparent;
+	border: none;
+	font: inherit;
+
+	&:hover {
+		cursor: pointer;
+	}
+}

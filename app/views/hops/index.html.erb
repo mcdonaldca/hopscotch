@@ -1,0 +1,10 @@
+<h1>hops</hi>
+
+<h2> List of hops </h2>
+<ul>
+<% @hops.each do |hop| %>
+<li>
+<%= hop.code %> ( <%= link_to "Delete", hop_url(hop), method: 'delete' %>)
+</li>
+<% end %>
+</ul>

@@ -1,0 +1,31 @@
+<h1>BEGIN &nbsp;A&nbsp; HOP</h1>
+
+<%= User.find(session[:user_id]).current_hop %>
+<div class="option-button">
+	<div class="text">
+		MAKE A GAME PLAN
+		<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f3af.png"></div>
+	</div>
+</div>
+
+<%= form_tag create_hop_url, method: "post" do %>
+	<div class="option-button">
+		<div class="text">
+			<%= submit_tag "WING IT", :class => "submit" %> 
+			<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f413.png"></div>
+		</div>
+	</div>
+	<%= hidden_field_tag "handle", "wing" %>
+<% end %>
+
+<div class="join-hop">
+	<%= form_tag create_hop_url, method: "post" do %>
+	  <%= text_field_tag 'join-code' %>
+		<div class="option-button">
+			<div class="text">
+				JOIN A HOP
+				<div class="button-emoji"><img src="https://abs.twimg.com/emoji/v1/72x72/1f46f.png"></div>
+			</div>
+		</div>
+	<% end %>
+</div>

@@ -14,7 +14,11 @@ class AuthController < ApplicationController
       if (@user.password == password_from_form)
         # User successfully logged in
         session[:user_id] = @user.id
-        redirect_to bac_url
+        if @user.current_hop.nil?
+          redirect_to new_hop_url
+        else
+          redirect_to bac_url
+        end
       else
         flash[:notice] = "Incorrect Password"
         redirect_to login_url

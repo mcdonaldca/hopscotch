@@ -6,7 +6,11 @@ class MainController < ApplicationController
 	before_filter :get_logged_in_user
 
 	def bac
-		@booze_level = User.find(session[:user_id]).booze_level
+		user = User.find(session[:user_id])
+		if user.current_hop.nil?
+			redirect_to new_hop_url
+		end
+		@booze_level = user.booze_level
 	end
 
 	def get_bac
@@ -76,15 +80,17 @@ class MainController < ApplicationController
 	end
 
 	def uber
-		
-		firstname = "Erin"
-		lastname = "Hoffman"
-		phone = "3174167556"
+		user = User.find(session[:user_id])
+		reg = Registration.find(user.current_hop)
+		firstname = user.first
+		lastname = user.last
+		phone = user.phone
+
 		#uberdestination = "229%20Commonwealth%20Ave%2C%20Boston%2C%20MA%2002116"
 		@uberurl = "https://m.uber.com/sign-up?client_id=a-RTv0w8VfNjNR0oTUio1LXBDrjrBIUx"
 		@uberurl += "&first_name="+firstname+"&last_name="+lastname+"&mobile_phone="+phone #+"&dropoff_address="+uberdestination
-		@uberurl += "&dropoff_latitude=42.351248&dropoff_longitude=-71.082297"
-
+		@uberurl += "&dropoff_latitude=" + reg.final_destination_lat
+		@uberurl += "&dropoff_longitude=" + reg.final_destination_long
 	end
 
 	def get_booze_level(bac)

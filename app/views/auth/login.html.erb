@@ -3,13 +3,23 @@
 		<p><%= flash[:notice] %></p>
 	</div>
 
-	<%= form_tag(do_login_url, method: "post") do %>
-		<%= text_field_tag     :username,    nil, placeholder: 'Username' %><br />
-		<%= password_field_tag :password, nil, placeholder: 'Password' %><br />
-		<%= submit_tag "Log In", class: "button submit" %>
+	<%= form_tag do_login_url, method: "post" do %>
+		<%= text_field_tag :username, nil, :placeholder => 'Username', :class => "latlong" %>
+		<%= password_field_tag :password, nil, :placeholder => 'Password', :class => "latlong" %>
+		<div class="option-button">
+			<div class="text">
+				<%= submit_tag "LOG IN", :class => "submit" %>
+			</div>
+		</div>
 	<% end %>
 
 	<div class="new-user">
-		<%= link_to "Create New User", new_user_url %>
+		<%= link_to new_user_url do %>
+			<div class="option-button blue">
+				<div class="text">
+					
+				</div>
+			</div>
+		<% end %>
 	</div>
 </div>

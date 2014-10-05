@@ -1,9 +1,8 @@
 Hopscotch::Application.routes.draw do
   
+  resources :locations
   resources :registrations
-
-  resources :hops
-
+  #resources :hops
   resources :users
 
   root to: 'main#bac', as: 'bac'
@@ -21,6 +20,16 @@ Hopscotch::Application.routes.draw do
   get "options/bars" => "main#bars", :as => :bars
   get "options/food" => "main#food", :as => :food
   get "options/uber" => "main#uber", :as => :uber
+
+  get "hops" => "hops#index", :as => :hops
+  get "hops/new" => "hops#new", :as => :new_hop 
+  get "hops/current" => "hops#current", :as => :current_hop
+  get "hops/leave" => "hops#leave", :as => :leave_hop
+  get "hops/end" => "hops#end_hop", :as => :end_hop
+  get "hops/uber_end" => "hops#uber_end", :as => :uber_end
+  post "hops/create" => "hops#create", :as => :create_hop
+  get "hops/destination" => "hops#destination", :as => :destination
+  post "hops/save_destination" => "hops#save_destination", :as => :save_destination
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

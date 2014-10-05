@@ -1,0 +1,12 @@
+<h1>regs</hi>
+
+<h2> List of reg </h2>
+<ul>
+<% @regs.each do |reg| %>
+<li>
+<%= reg.id %> (<%= link_to "Delete", registration_url(reg), method: 'delete' %>)
+</li>
+<% end %>
+</ul>
+
+	
